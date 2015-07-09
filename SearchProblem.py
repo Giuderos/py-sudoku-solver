@@ -30,20 +30,3 @@ class SearchProblem:
             print "Finished all alternatives in "+str(currentEmpty)
         self.setNextEmpty(currentEmpty,self.emptySymbol)
         return False
-
-    def BranchandBound(self,Empty=None):
-        currentEmpty=self.computeNextEmpty(Empty)
-        if currentEmpty==None:
-            if self.isAdmissible():
-                currentcost=self.cost()
-                if currentcost<self.cmin:
-                    self.cmin=currentcost
-                    self.storeCurrentsol()
-            return
-
-        for sigma in self.Sigma(currentEmpty):
-            self.setNextEmpty(currentEmpty,sigma)
-            if (self.LBound()<self.cmin):
-                self.BranchandBound(currentEmpty)
-
-        self.setNextEmpty(currentEmpty, self.emptySymbol)
